@@ -18,16 +18,24 @@ mkdir ProjectName
 ```bash
 cd ProjectName
 ```
-4. Make sure you have TypeScript installed globally 
+4. We create a **package.json** file which will tell the project what packages and scripts are needed. We also need this to install webpack and loaders. We use the npm cli.
+```bash
+npm init 
+```
+5. This is to help us with version control. 
+```bash
+git init
+```
+6. Make sure you have TypeScript installed globally 
 ```bash
 npm install -g typescript
 ```
-5. Due to some minor bugs and set ups, it's a good idea to install typescript to the local project as well to help reduce future issues.
+7. Due to some minor bugs and set ups, it's a good idea to install typescript to the local project as well to help reduce future issues.
 ```bash
 npm install typescript --save-dev
 ```
-6. Create **tsconfig.json** file, this will help us customize TypeScript with its rules.
-7. In the **tsconfig.json** file, add the following below. Module which module system you're using. Remember that most browsers don't support TypeScript and many are not up to date with modern JavaScript. jsx is the javaScript/xml which creates html elements. We assign “react”. Watch looks for any changes in TypeScript. Target refers to what the TypeScript is compiled into. ES5 is used across most browsers, thats why we set that as our target. lib is “[es6, dom]” which means what libraries can we write with TypeScript. We can write in es6 TypeScript, so it will know the syntax we are using because of lib. **NOTE** that even though we created this file, webpack will handle most of the configurations by using ts-loader. However, as referenced in this [article](https://stackoverflow.com/questions/52989299/how-where-does-webpack-use-the-tsconfig-file-and-tsc), ts-loader and webpack may look and honor **tsconfig.json** compile options.
+8. Create **tsconfig.json** file, this will help us customize TypeScript with its rules.
+9. In the **tsconfig.json** file, add the following below. Module which module system you're using. Remember that most browsers don't support TypeScript and many are not up to date with modern JavaScript. jsx is the javaScript/xml which creates html elements. We assign “react”. Watch looks for any changes in TypeScript. Target refers to what the TypeScript is compiled into. ES5 is used across most browsers, thats why we set that as our target. lib is “[es6, dom]” which means what libraries can we write with TypeScript. We can write in es6 TypeScript, so it will know the syntax we are using because of lib. **NOTE** that even though we created this file, webpack will handle most of the configurations by using ts-loader. However, as referenced in this [article](https://stackoverflow.com/questions/52989299/how-where-does-webpack-use-the-tsconfig-file-and-tsc), ts-loader and webpack may look and honor **tsconfig.json** compile options.
 ```json
 {
     "compilerOptions": {
@@ -42,14 +50,6 @@ npm install typescript --save-dev
     }
 }
 ``` 
-8. We create a **package.json** file which will tell the project what packages and scripts are needed. We also need this to install webpack and loaders. We use the npm cli.
-```bash
-npm init 
-```
-9. This is to help us with version control. 
-```bash
-git init
-```
 10. Install ReactJS Dependencies. These Dependencies allow us to use the React library to help make components and react-dom will help manipulate the DOM.
 ```bash
 npm install --save react react-dom
