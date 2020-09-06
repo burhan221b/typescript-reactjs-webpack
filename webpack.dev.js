@@ -7,7 +7,8 @@ module.exports = merge(common, {
     mode: "development",
     output: {
         filename: "bundle.js",
-        path: path.resolve(__dirname, "public")
+        path: path.resolve(__dirname, "public"),
+        publicPath: '/'
     },
     module: {
         rules: [
@@ -23,5 +24,8 @@ module.exports = merge(common, {
                 exclude: /node_modules/,
             }
         ]
-    }
+    },
+    devServer: {
+        historyApiFallback: true,
+    },
 });

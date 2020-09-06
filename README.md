@@ -295,7 +295,55 @@ declare module "*.svg" {
     ]
 }
 ```
+32. Most likely you will create different url paths, thats when we need to start using react-router-dom and it's types. These will include BrowserRouter, Route, Switch, Link, and more.
+```bash
+npm install -save react-router-dom 
+```
+```bash
+npm install --save-dev @types/react-router-dom
+```
+```javascript
+// src/App.tsx
+import * as React from 'react';
+import {Route, Switch, Link } from 'react-router-dom';
+import Home from './components/Home';
+import About from './components/About';
 
+const App = () => {
+    return (
+            <div className="App">
+                <div className="App-header">
+                    <div>
+                    {/*Links*/}
+                        <Link to="/">Home </Link>
+                        <Link to="/about">About Us </Link>
+                    </div>
+                    {/*Routes*/}
+                    <Switch>
+                        <Route component={About} path="/about" exact />
+                        <Route component={Home} path="/" exact />
+                        <Route component={Page404} path="/" />
+                    </Switch>
+                </div>
+            </div>
+    )
+}
+
+App.displayName = "App";
+export default App;
+```
+```javascript
+// src/index.tsx
+import * as React from 'react';
+import * as ReactDOM from 'react-dom';
+import { BrowserRouter } from 'react-router-dom';
+ReactDOM.render(
+    <BrowserRouter>
+        <App />
+    </BrowserRouter>, 
+    document.getElementById('root')
+)
+```
 
 ##### References used to create this program
 ##### * [Chris Hawkes](https://www.youtube.com/watch?v=nCoQg5qbLcY)
