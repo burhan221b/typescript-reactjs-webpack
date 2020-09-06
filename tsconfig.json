@@ -8,5 +8,9 @@
             "es6",
             "dom"
         ]
-    }
+    },
+    "include": [
+        "./src",
+        "./custom.d.ts"
+    ]
 }

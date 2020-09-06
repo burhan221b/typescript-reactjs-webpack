@@ -269,6 +269,33 @@ npm run start
 npm run build
 ```
 29. Now you can see the program dynamically created the "public" folder which contains the unique hashed id bundles of compiled JavaScript, css, and other files. 
+30. Sometimes svg files and content wont work correctly with tsx and webpack out of the box. We need to include a special file in the root directory called **custom.d.ts** which will contain some configuration rules.
+```javascript
+declare module "*.svg" {
+    const content: any;
+    export default content;
+}
+```
+31. You will also need to include the newly crated **custom.d.ts** file in the **tsconfig.json** file for TypeScript to work properly with svg.
+```json
+{
+    "compilerOptions": {
+        "module": "CommonJS",
+        "jsx": "react",
+        "watch": true,
+        "target": "es5",
+        "lib": [
+            "es6",
+            "dom"
+        ]
+    },
+    "include": [
+        "./src",
+        "./custom.d.ts"
+    ]
+}
+```
+
 
 ##### References used to create this program
 ##### * [Chris Hawkes](https://www.youtube.com/watch?v=nCoQg5qbLcY)
