@@ -26,6 +26,9 @@ module.exports = merge(common, {
         ]
     },
     devServer: {
+        // Reference for mobile: https://stackoverflow.com/questions/35412137/how-to-get-access-to-webpack-dev-server-from-devices-in-local-network
+        host: '0.0.0.0',//your ip address
+        port: 8080,
         historyApiFallback: true,
     },
 });

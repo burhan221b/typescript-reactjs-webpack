@@ -1,10 +1,11 @@
 # ![Burhan221b Logo](https://drive.google.com/uc?export=view&id=1ShYHkaVxVpVDLmUVV8YhigZ-Kju3hJry) TypeScript ReactJS Webpack
 ### Created by Burhan 
 #### January 1, 2021
-##### Version 1.1.0
+##### Version 2.0.0
 ---
 
 ## This is a boilerplate ReactJS project using TypeScript and Webpack
+## (This refers to webpack 5, Please Refer to version 1.*.* repo using the tags tab above if you are using webpack 4)
 #### Note, this boilerplate was built from scratch, so I did not use create-react-app.
 
 ### Steps to create your own in ReactJS TypeScript project using Webpack
@@ -153,7 +154,7 @@ const path = require("path");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 
 module.exports = {
-    devtool: "inline-source-map",
+    // devtool: "inline-source-map",
     entry: "./src/index.tsx",
     module: {
         rules: [
@@ -163,17 +164,6 @@ module.exports = {
                 include: path.resolve(__dirname, "src"),
                 exclude: /node_modules/,
             },
-            // {
-            //     test: /\.scss$/,
-            //     // Remember, the way this array is read is in reverse order, so need to place "sass-loader" at the end
-            //     use: [
-            // "style-loader", // 3. Inject style tags into DOM
-            // "css-loader", // 2. Turns css into commonjs
-            // "sass-loader" // 1. Turns sass into css
-            // ],
-            //     include: path.resolve(__dirname, "src"),
-            //     exclude: /node_modules/,
-            // },
             {
                 test: /\.html$/,
                 use: "html-loader"
@@ -226,7 +216,13 @@ module.exports = merge(common, {
                 exclude: /node_modules/,
             }
         ]
-    }
+    },
+        devServer: {
+        // Reference for mobile: https://stackoverflow.com/questions/35412137/how-to-get-access-to-webpack-dev-server-from-devices-in-local-network
+        host: '0.0.0.0',//your ip address
+        port: 8080,
+        historyApiFallback: true,
+    },
 });
 ```
 23. Lets create **webpack.prod.js** which will be responsible for creating the final build of the project to send to your hosting service. Very similar to "webpack.dev.js", here we add more plugin. "MiniCssExtractPlugin" will do what the it's name entitles, it will minify the css. MiniCssExtractPlugin.loader can be seen under the scss loader rules set as it replaces style-loader which injects the css in the DOM/html file, this new function will extract the css file and create a new css file and inject style link on top of html file. In the filename section you can see that square brackets as name and contentHash, this means every time it bundles, it will create the css using it's original name in the src folder, but will also include a unique content hash id. It will only changed if there is ever a change in the code for it. This is used for cache reasons, so when you upload it to server/host and a request is made for the content, the client would know if there has been changed in the file, otherwise it would use it's own local file cache if it had visted your site before. **Note, We use this in our "output:filename: "bundle.[contentHash].js"" property as well. We didn't use this in dev because we care more about debugging then web services**. Another plugin CleanWebpackPlugin will remove the previous and all other hashed files build, so you don't stacking up bundle.js files. "optimization" property is also added, the PROBLEM now is that before production mode automatically minimized the javascript file, but because we are customizing optimization, it doesn’t minify JS. We have to now tell what types of minimize when we use this property. TerserPlugin is already pre-installed through webpack and should return javascript as minified. 
@@ -272,7 +268,7 @@ module.exports = merge(common, {
 ```json
   "scripts": {
     "build": "webpack --config webpack.prod.js",
-    "start": "webpack-dev-server --open --config webpack.dev.js",
+    "start": "webpack serve --config webpack.dev.js",
   },
 ```
 25. **For the final steps, please note sometimes the version of node your using may cause an issue, please read the console and see if it recommend you which version of node you should use or use the latest lts version of node.**
