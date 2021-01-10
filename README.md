@@ -5,8 +5,18 @@
 ---
 
 ## This is a boilerplate ReactJS project using TypeScript and Webpack
-## (This refers to webpack 5, Please Refer to version 1.*.* repo using the tags tab above if you are using webpack 4)
+### This refers to webpack 5, please refer to version 1.^0.^0 repo using the tags tab above if you are using webpack 4
 #### Note, this boilerplate was built from scratch, so I did not use create-react-app.
+
+### If TL;DR 
+#### Dependencies 
+```bash
+npm install --save react react-dom react-router-dom
+```
+#### Developer Dependencies
+```bash
+npm install --save-dev @svgr/webpack @types/node @types/react @types/react-dom @types/react-router-dom clean-webpack-plugin css-loader file-loader html-loader html-webpack-plugin mini-css-extract-plugin node-sass optimize-css-assets-webpack-plugin sass-loader style-loader ts-loader typescript webpack webpack-cli webpack-dev-server webpack-merge
+```
 
 ### Steps to create your own in ReactJS TypeScript project using Webpack
 #### **For MacOS**
