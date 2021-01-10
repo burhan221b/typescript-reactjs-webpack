@@ -1,7 +1,7 @@
 # ![Burhan221b Logo](https://drive.google.com/uc?export=view&id=1ShYHkaVxVpVDLmUVV8YhigZ-Kju3hJry) TypeScript ReactJS Webpack
 ### Created by Burhan 
-#### January 1, 2021
-##### Version 2.0.0
+#### January 9, 2021
+##### Version 2.1.0
 ---
 
 ## This is a boilerplate ReactJS project using TypeScript and Webpack
@@ -169,7 +169,7 @@ module.exports = {
                 use: "html-loader"
             },
             {
-                test: /\.(svg|png|jpe?g|gif)$/,
+                test: /\.(png|jpe?g|gif)$/,
                 use: [
                     {
                         loader: 'file-loader',
@@ -180,6 +180,18 @@ module.exports = {
                     },
                 ],
             },
+            {
+                test: /\.svg$/,
+                use: [
+                    {
+                        loader: '@svgr/webpack',
+                        options: {
+                            name: "[name].[hash].[ext]",
+                            outputPath: "assets"
+                        }
+                    }
+                ]
+            },
         ]
     },
     plugins: [new HtmlWebpackPlugin({ template: "./src/template.html" })],
@@ -189,6 +201,18 @@ module.exports = {
     },
 }
 ```
+React 17 with create-react-app uses svg assets as a component. As seen above, for svg files we are using the @svgr/webpack loader because this gives the user more console in dynamically changing the fillColor and other properties for he svg. 
+Reference: https://www.npmjs.com/package/@svgr/webpack
+```javascript
+import Star from './star.svg'
+ 
+const App = () => (
+  <div>
+    <Star />
+  </div>
+)
+```
+
 22. Now lets create **webpack.dev.js** in the root directory. The common is doing most of the work, here in dev, we want to quickly build our application and debug any major issues. Good for working on GUI. This webpack configuration does not build any folders, uses memory to run our code. We require common from the "webpack.common.js" and require merge from "webpack-merge". Unlike common, we export by placing our webpack instructions inside the merge function. First argument is "common" which "webpack.common.js" and second argument is the development webpack instructions. Inside our development webpack we use mode: “development” that actually spreads the code in the bundle file and is a little more readable. Create "output" object that we create the filename of the bundle javascript and we use the "path" to help point where we want our newly create folder that contains the bundle javascript to be placed. "--dirname" Basically says what directory webpack is in. We include sass loader that will be different then our production webpack that we'll create in the next steps. 
 ```javascript
 // For system to know root directory
